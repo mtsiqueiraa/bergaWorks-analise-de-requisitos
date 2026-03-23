@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+actor "Gestora" as Gestora
+actor "Funcionária PCD" as PCD
+actor "Usuário" as Usuario
+actor "RH" as RH
+actor "Gerente" as Gerente
+
+rectangle "Sistema BergaWorks Money\nRU: 5571489" {
+  usecase "Solicitar abertura\nda porta de entrada\npor voz" as UC1
+  usecase "Solicitar abertura\npor celular\n(QR Code / aproximação)" as UC2
+  usecase "Controlar luzes\npor comando de voz" as UC3
+  usecase "Controlar ar-condicionado\npor comando de voz" as UC4
+  usecase "Solicitar abertura\nde sala restrita\nconforme perfil" as UC5
+  usecase "Enviar notificação\nfora do horário comercial" as UC6
+}
+
+Gestora -- UC1
+Gestora -- UC2
+Gestora -- UC3
+Gestora -- UC4
+Gestora -- UC6
+
+PCD -- UC1
+PCD -- UC3
+PCD -- UC4
+
+Usuario -- UC2
+Usuario -- UC3
+Usuario -- UC4
+
+RH -- UC5
+Gerente -- UC5
+@enduml

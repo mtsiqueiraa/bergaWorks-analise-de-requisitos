@@ -1,0 +1,66 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class Usuario {
+  - idUsuario: int
+  - nome: string
+  - perfil: string
+  + solicitarAcesso()
+  + emitirComandoVoz()
+}
+
+class ControladorDeAcesso {
+  - horarioInicial: time
+  - horarioFinal: time
+  + validarPerfil()
+  + validarHorario()
+  + liberarAcesso()
+}
+
+class ServidorLocal {
+  - enderecoIP: string
+  - conexaoExterna: string
+  + registrarEvento()
+  + enviarNotificacao()
+}
+
+class PortaAutomatizada {
+  - idPorta: int
+  - local: string
+  - status: string
+  + abrir()
+  + fechar()
+}
+
+class AutenticacaoCelular {
+  - qrCode: string
+  - tokenAproximacao: string
+  + validarQrCode()
+  + validarAproximacao()
+}
+
+class Camera {
+  - idCamera: int
+  - local: string
+  + reconhecerUsuario()
+  + detectarMovimentacao()
+}
+
+class SistemaDeAmbiente {
+  - statusLuzes: string
+  - statusAr: string
+  + ligarLuzes()
+  + desligarLuzes()
+  + ligarAr()
+  + desligarAr()
+}
+
+Usuario -- ControladorDeAcesso : solicita
+ControladorDeAcesso -- ServidorLocal : registra
+ControladorDeAcesso -- PortaAutomatizada : libera
+ControladorDeAcesso -- AutenticacaoCelular : valida
+AutenticacaoCelular -- Camera : consulta
+Usuario -- SistemaDeAmbiente : comanda
+SistemaDeAmbiente -- Camera : integra
+@enduml
